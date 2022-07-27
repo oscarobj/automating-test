@@ -70,8 +70,12 @@ class HappyNumbers extends TestCase
         $happyNumberService = new HappyNumberService();
 
         $happyNumber = 7;
+        $notHappyNumber = 15;
+
         $isAHappyNumber = $happyNumberService->isHappyNumber($happyNumber);
+        $isNotAHappyNumber = $happyNumberService->isHappyNumber($notHappyNumber);
 
         $this->assertTrue($isAHappyNumber);
+        $this->assertFalse($isNotAHappyNumber);
     }
 }
