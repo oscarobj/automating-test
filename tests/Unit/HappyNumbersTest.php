@@ -5,13 +5,14 @@ namespace Tests\Unit;
 use App\services\HappyNumberService;
 use Tests\TestCase;
 
-class HappyNumbers extends TestCase
+class HappyNumbersTest extends TestCase
 {
     /** @test
      * separar as partes de um inteiro
      */
     public function splitInteger()
     {
+        // Arrange
         $happyNumberService = new HappyNumberService();
         $number = 12;
         $expected = [
@@ -19,7 +20,11 @@ class HappyNumbers extends TestCase
             1 => 2,
         ];
 
-        $this->assertEquals($expected, $happyNumberService->splitInteger($number));
+        // Act
+        $split = $happyNumberService->splitInteger($number);
+
+        // Assert
+        $this->assertEquals($expected, $split);
     }
 
     /** @test
@@ -27,20 +32,21 @@ class HappyNumbers extends TestCase
      */
     public function squareNumbers()
     {
+        // Arrange
         $happyNumberService = new HappyNumberService();
-
         $entry = [
             0 => 1,
             1 => 2,
         ];
-
-        $split = $happyNumberService->squareNumbers($entry);
-
         $expected = [
             0 => 1,
             1 => 4,
         ];
 
+        // Act
+        $split = $happyNumberService->squareNumbers($entry);
+
+        // Assert
         $this->assertEquals($expected, $split);
     }
 
@@ -49,16 +55,18 @@ class HappyNumbers extends TestCase
      */
     public function sumNumbers()
     {
+        // Arrange
         $happyNumberService = new HappyNumberService();
-
         $numbers = [
             0 => 1,
             1 => 4,
         ];
-
         $expected = 5;
+
+        // Act
         $sum = $happyNumberService->sumNumbers($numbers);
 
+        // Assert
         $this->assertEquals($expected, $sum);
     }
 
@@ -67,14 +75,16 @@ class HappyNumbers extends TestCase
      */
     public function verifiyIfIsAHappyNumber()
     {
+        // Arrange
         $happyNumberService = new HappyNumberService();
-
         $happyNumber = 7;
         $notHappyNumber = 15;
 
+        // Act
         $isAHappyNumber = $happyNumberService->isHappyNumber($happyNumber);
         $isNotAHappyNumber = $happyNumberService->isHappyNumber($notHappyNumber);
 
+        // Assert
         $this->assertTrue($isAHappyNumber);
         $this->assertFalse($isNotAHappyNumber);
     }

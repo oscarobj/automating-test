@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\services\NaturalNumbersService;
 use Tests\TestCase;
 
-class MultiplesOfThreeAndFive extends TestCase
+class MultiplesOfThreeAndFiveTest extends TestCase
 {
     private int $min = 0;
 
@@ -14,10 +14,9 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function getMultiplesOfThreeOrFiveBelow10()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 10;
-
-        $multiples = $naturalNumbersService->getMultiplesOfTreeOrFive($this->min, $max);
         $expected = [
             0 => 0,
             1 => 3,
@@ -26,6 +25,10 @@ class MultiplesOfThreeAndFive extends TestCase
             4 => 9,
         ];
 
+        // Act
+        $multiples = $naturalNumbersService->getMultiplesOfTreeOrFive($this->min, $max);
+
+        // Assert
         $this->assertEquals($expected, $multiples);
     }
 
@@ -34,16 +37,19 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function getMultiplesOfThreeAndFiveBelow31()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 31;
-
-        $multiples = $naturalNumbersService->getMultiplesOfTreeAndFive($this->min, $max);
         $expected = [
             0 => 0,
             1 => 15,
             2 => 30,
         ];
 
+        // Act
+        $multiples = $naturalNumbersService->getMultiplesOfTreeAndFive($this->min, $max);
+
+        // Assert
         $this->assertEquals($expected, $multiples);
     }
 
@@ -52,16 +58,19 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function getMultiplesOfThreeAndSevenBelow36()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 36;
-
-        $multiples = $naturalNumbersService->getMultiplesOfTreeOrFiveAndSeven($this->min, $max);
         $expected = [
             0 => 0,
             1 => 21,
             2 => 35,
         ];
 
+        // Act
+        $multiples = $naturalNumbersService->getMultiplesOfTreeOrFiveAndSeven($this->min, $max);
+
+        // Assert
         $this->assertEquals($expected, $multiples);
     }
 
@@ -71,14 +80,16 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function sumMultiplesOfThreeOrFiveBelow10()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 10;
+        $expected = 23;
 
+        // Act
         $multiples = $naturalNumbersService->getMultiplesOfTreeOrFive($this->min, $max);
         $sumOfMultiples = $naturalNumbersService->sumMultiples($multiples);
 
-        $expected = 23;
-
+        // Assert
         $this->assertEquals($expected, $sumOfMultiples);
     }
 
@@ -87,14 +98,16 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function sumMultiplesOfThreeAndFiveBelow31()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 31;
+        $expected = 45;
 
+        // Act
         $multiples = $naturalNumbersService->getMultiplesOfTreeAndFive($this->min, $max);
         $sumOfMultiples = $naturalNumbersService->sumMultiples($multiples);
 
-        $expected = 45;
-
+        // Assert
         $this->assertEquals($expected, $sumOfMultiples);
     }
 
@@ -103,14 +116,16 @@ class MultiplesOfThreeAndFive extends TestCase
      */
     public function sumMultiplesOfThreeOrFiveAndSevenBelow36()
     {
+        // Arrange
         $naturalNumbersService = new NaturalNumbersService();
         $max = 36;
+        $expected = 56;
 
+        // Act
         $multiples = $naturalNumbersService->getMultiplesOfTreeOrFiveAndSeven($this->min, $max);
         $sumOfMultiples = $naturalNumbersService->sumMultiples($multiples);
 
-        $expected = 56;
-
+        // Assert
         $this->assertEquals($expected, $sumOfMultiples);
     }
 }

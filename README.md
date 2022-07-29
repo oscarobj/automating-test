@@ -50,3 +50,20 @@ não, e o sistema consiga responder.
 - É esperado que as soluções anteriores sejam re-usadas, e cada novo componente criado seja coberto com testes automatizados.
 ----------------------------------------------
 
+
+# Exercício 4 - Calculo de frete
+
+### Em todos os e-commerces, o usuário pode criar um carrinho de compras, adicionar um produto e calcular o valor do frete para a entrega.
+### O valor do frete é calculado a partir do CEP do usuário (destinatário), e geralmente é provido pelos serviços de fretamento (correios ou particular), muitas vezes sendo invocado uma API que, dado o CEP (dentre outros dados), traz o valor do frete.
+### Desenvolva um sistema simplificado do carrinho, com os seguintes requisitos:
+
+- Um produto possui um nome e um valor;
+- Um carrinho recebe um conjunto de produtos e a quantidade de itens de cada produto;
+- Um carrinho pertence à um usuário, que tem nome e seu endereço de entrega representado por um CEP;
+- Um serviço que recebe o carrinho, e retorna o valor final para o usuário;
+
+### Esse serviço
+
+- Faz a soma total de valores de todos os produtos do carrinho;
+- Caso o valor seja < $100,00, o sistema requisita para um serviço externo o valor do frete de acordo com o CEP do dono do carrinho;
+- Retorna o valor final do carrinho (com ou sem frete);

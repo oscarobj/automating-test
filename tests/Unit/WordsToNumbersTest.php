@@ -6,7 +6,7 @@ use App\services\NaturalNumbersService;
 use App\services\WordsToNumbersService;
 use PHPUnit\Framework\TestCase;
 
-class WordsToNumbers extends TestCase
+class WordsToNumbersTest extends TestCase
 {
     /**
      * @test
@@ -14,12 +14,15 @@ class WordsToNumbers extends TestCase
      */
     public function testLetterTranslation()
     {
+        // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
-
         $letter = 'P';
         $expected = 42;
+
+        // Act
         $result = $wordsToNumbersService->translateLetter($letter);
 
+        // Assert
         $this->assertEquals($expected, $result);
     }
 
@@ -29,16 +32,19 @@ class WordsToNumbers extends TestCase
      */
     public function testWordSplit()
     {
+        // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
-
         $word = 'Ana';
         $expected = [
             0 => 'A',
             1 => 'n',
             2 => 'a',
         ];
+
+        //Act
         $result = $wordsToNumbersService->splitWordLetters($word);
 
+        //Assert
         $this->assertEquals($expected, $result);
     }
 
@@ -48,12 +54,15 @@ class WordsToNumbers extends TestCase
      */
     public function testWordTranslation()
     {
+        // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
-
         $word = 'AbObORa';
         $expected = 27 + 2 + 41 + 2 + 41 + 44 + 1;
+
+        // Act
         $sum = $wordsToNumbersService->translateWordToAlphabetSum($word);
 
+        // Assert
         $this->assertEquals($expected, $sum);
     }
 
@@ -63,13 +72,18 @@ class WordsToNumbers extends TestCase
      */
     public function checkIfNumberIsPrime()
     {
+        // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
-
         $primeNumber = 11;
         $notPrimeNumber = 4;
 
-        $this->assertTrue($wordsToNumbersService->isPrime($primeNumber));
-        $this->assertFalse($wordsToNumbersService->isPrime($notPrimeNumber));
+        // Act
+        $isPrime = $wordsToNumbersService->isPrime($primeNumber);
+        $isNotPrime = $wordsToNumbersService->isPrime($notPrimeNumber);
+
+        // Assert
+        $this->assertTrue($isPrime);
+        $this->assertFalse($isNotPrime);
     }
 
     /**
@@ -78,13 +92,17 @@ class WordsToNumbers extends TestCase
      */
     public function checkIfNumberIsMultipleOf3Or5()
     {
+        // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
-
         $multipleNumber = 30;
         $notMultipleNumber = 2;
 
-        $this->assertTrue($wordsToNumbersService->isMultipleOf3Or5($multipleNumber));
-        $this->assertFalse($wordsToNumbersService->isMultipleOf3Or5($notMultipleNumber));
+        // Act
+        $isMultipleNumber = $wordsToNumbersService->isMultipleOf3Or5($multipleNumber);
+        $isNotMultipleNumber = $wordsToNumbersService->isMultipleOf3Or5($notMultipleNumber);
+        // Assert
+        $this->assertTrue($isMultipleNumber);
+        $this->assertFalse($isNotMultipleNumber);
     }
 
     /**
@@ -93,6 +111,8 @@ class WordsToNumbers extends TestCase
      */
     public function checkIfWordInfoWorks()
     {
+        // Arrange
+
         $wordsToNumbersService = new WordsToNumbersService();
 
         $happy = 'be'; // 7 (também é primo)
@@ -117,8 +137,14 @@ class WordsToNumbers extends TestCase
             'isHappy' => false,
         ];
 
-        $this->assertEquals($expectedIsHappy, $wordsToNumbersService->getWordInfo($happy));
-        $this->assertEquals($expectedIsPrime, $wordsToNumbersService->getWordInfo($prime));
-        $this->assertEquals($expectedIsMultiple, $wordsToNumbersService->getWordInfo($multipleOf3Or5));
+        // Act
+        $isHappy = $wordsToNumbersService->getWordInfo($happy);
+        $isPrime = $wordsToNumbersService->getWordInfo($prime);
+        $isMultipleOf3Or5 = $wordsToNumbersService->getWordInfo($multipleOf3Or5);
+
+        // Assert
+        $this->assertEquals($expectedIsHappy, $isHappy);
+        $this->assertEquals($expectedIsPrime, $isPrime);
+        $this->assertEquals($expectedIsMultiple, $isMultipleOf3Or5);
     }
 }
