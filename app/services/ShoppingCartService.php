@@ -23,52 +23,26 @@ class ShoppingCartService implements ShoppingCartInterface
      * @param int $productQuantity
      * @return ShoppingCart
      */
-    function addProduct(ShoppingCart $shoppingCart, Product $product, int $productQuantity): ShoppingCart
-    {
-        $alreadyExists = $this->cartHasProduct($shoppingCart, $product);
-
-        if (!$alreadyExists) {
-            $shoppingCart->products[] = [
-                $product->id => $productQuantity
-            ];
-        }
-
-        return $shoppingCart;
-    }
-
-    /**
-     * @param ShoppingCart $shoppingCart
-     * @param Product $product
-     * @return ShoppingCart
-     */
-    function removeProduct(ShoppingCart $shoppingCart, Product $product): ShoppingCart
-    {
-        // Executar ação apenas se o produto existir no carrinho
-        foreach ($shoppingCart->products as $key => $product) {
-            if (key($product) == $product->id) {
-                // remover produto do carrinho
-                unset($shoppingCart->products[$key]);
-            }
-        }
-        return $shoppingCart;
-    }
-
-    /**
-     * @param ShoppingCart $shoppingCart
-     * @param Product $product
-     * @param int $productQuantity
-     * @return ShoppingCart
-     */
     function addProductQuantity(ShoppingCart $shoppingCart, Product $product, int $productQuantity): ShoppingCart
     {
-        // Executar ação apenas se o produto existir no carrinho
-        foreach ($shoppingCart->products as $key => $product) {
-            if (key($product) == $product->id) {
-                // Somar qunatidade presente à quantidade passada por parâmetro
-                $shoppingCart->products[$key]['quantity'] += $productQuantity;
+        $products = $shoppingCart->products;
+
+        //verifica se o carrinho está vazio
+        if (empty($shoppingCart->products)) {
+            $products = [['id' => $product->id, 'quantity' => $productQuantity, 'price' => $product->price]];
+        } else {
+            foreach ($shoppingCart->products as $key => $value) {
+                //verifica se o produto já existe
+                if ($value['id'] == $product->id) {
+                    // Somar qunatidade presente à quantidade passada por parâmetro
+                    $shoppingCart->products[$key]['quantity'] += $productQuantity;
+                } else {
+                    // Adicionar produto
+                    $products[] = ['id' => $product->id, 'quantity' => $productQuantity, 'price' => $product->price];
+                }
             }
         }
-
+        $shoppingCart->products = $products;
         return $shoppingCart;
     }
 
@@ -80,18 +54,23 @@ class ShoppingCartService implements ShoppingCartInterface
      */
     function removeProductQuantity(ShoppingCart $shoppingCart, Product $product, int $productQuantity): ShoppingCart
     {
+        $products = $shoppingCart->products;
+
         // Executar ação apenas se o produto existir no carrinho
-        foreach ($shoppingCart->products as $key => $product) {
-            if (key($product) == $product->id) {
+        foreach ($products as $key => $value) {
+        // verifica se o produto já existe
+            if ($value['id'] == $product->id) {
                 // Se a quantidade a ser subtraída for maior do que a quantidade presente no carrinho, a quantidade final será zero.
-                if ($productQuantity > $shoppingCart->products[$key]['quantity']) {
-                    $shoppingCart->products[$key]['quantity'] = 0;
+                if ($productQuantity > $products[$key]['quantity']) {
+                    $products[$key]['quantity'] = 0;
                     // Senão, subtrai-se a quantidade passada por parâmetro da quantidade presente no carrinho
                 } else {
-                    $shoppingCart->products[$key]['quantity'] -= $productQuantity;
+                    $products[$key]['quantity'] -= $productQuantity;
                 }
             }
         }
+        $shoppingCart->products = $products;
+
         return $shoppingCart;
     }
 
@@ -109,10 +88,10 @@ class ShoppingCartService implements ShoppingCartInterface
 
     /**
      * @param ShoppingCart $shoppingCart
-     * @param User $user
+     * @param $userAddress
      * @return float
      */
-    function recalculateShoppingCart(ShoppingCart $shoppingCart, User $user): float
+    function recalculateShoppingCart(ShoppingCart $shoppingCart, $userAddress): float
     {
         $totalPrice = 0;
         $shippingChargeLimit = 100; // definicão do limite máximo para cobrança de frete
@@ -123,15 +102,15 @@ class ShoppingCartService implements ShoppingCartInterface
         }
 
         // se o frete for menor que 100, soma-se o valor de frete
-        if ($totalPrice <= $shippingChargeLimit) {
-            return $totalPrice + $this->deliveryInterface->setDeliveryCost($user->address);
+        if ($totalPrice > 0 && $totalPrice <= $shippingChargeLimit) {
+            return $totalPrice + $this->deliveryInterface->setDeliveryCost($userAddress);
         }
 
         // senão, a compra é isenta de frete
         return $totalPrice;
     }
 
-    public function cartHasProduct(ShoppingCart $shoppingCart, Product $product): bool
+    public function cartHasSpecificProduct(ShoppingCart $shoppingCart, Product $product): bool
     {
         foreach ($shoppingCart->products as $key => $product) {
             if (key($product) == $product->id) {
