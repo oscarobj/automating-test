@@ -4,11 +4,19 @@ namespace App\services;
 
 class HappyNumberService
 {
+    /**
+     * @param int $number
+     * @return array
+     */
     public function splitInteger(int $number): array
     {
         return str_split($number);
     }
 
+    /**
+     * @param array $numbers
+     * @return array
+     */
     public function squareNumbers(array $numbers): array
     {
         $squareNumbers = [];
@@ -20,7 +28,11 @@ class HappyNumberService
         return $squareNumbers;
     }
 
-    public function sumNumbers(array $numbers)
+    /**
+     * @param array $numbers
+     * @return int
+     */
+    public function sumNumbers(array $numbers): int
     {
         $sum = 0;
 
@@ -31,7 +43,11 @@ class HappyNumberService
         return $sum;
     }
 
-    public function isHappyNumber($number): bool
+    /**
+     * @param int $number
+     * @return bool
+     */
+    public function isHappyNumber(int $number): bool
     {
         $count = 0;
         $maxOperations = 1000;

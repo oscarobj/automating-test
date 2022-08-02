@@ -40,6 +40,10 @@ class NaturalNumbersService
         return $this->getCountOfMultiples($minValue, $maxValue, NaturalNumbersEnum::MultiplesOfXOrYAndZ);
     }
 
+    /**
+     * @param array $multilples
+     * @return int
+     */
     public function sumMultiples(array $multilples): int
     {
         $sum = 0;

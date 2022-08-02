@@ -2,8 +2,26 @@
 
 namespace App\services;
 
+use Exception;
+
 class WordsToNumbersService
 {
+    /**
+     * @var NaturalNumbersService
+     */
+    private NaturalNumbersService $naturalNumbersService;
+
+    /**
+     * @param NaturalNumbersService $naturalNumbersService
+     */
+    public function __construct(NaturalNumbersService $naturalNumbersService)
+    {
+        $this->naturalNumbersService = $naturalNumbersService;
+    }
+
+    /**
+     * @return int[]
+     */
     public function setAlphabetToNumbers(): array
     {
         return [
@@ -19,6 +37,10 @@ class WordsToNumbersService
         ];
     }
 
+    /**
+     * @param string $word
+     * @return int
+     */
     public function translateWordToAlphabetSum(string $word): int
     {
         $happyNumbersService = new HappyNumberService();
@@ -33,11 +55,19 @@ class WordsToNumbersService
         return $happyNumbersService->sumNumbers($sum);
     }
 
+    /**
+     * @param string $word
+     * @return array
+     */
     public function splitWordLetters(string $word): array
     {
         return str_split($word);
     }
 
+    /**
+     * @param $letter
+     * @return int|null
+     */
     public function translateLetter($letter): ?int
     {
         $alphabet = $this->setAlphabetToNumbers();
@@ -45,16 +75,18 @@ class WordsToNumbersService
         return $alphabet[$letter] ?? null;
     }
 
+    /**
+     * @param int $number
+     * @return bool
+     */
     public function isPrime(int $number): bool
     {
         return gmp_prob_prime($number);
     }
 
-    public function isMultipleOf3Or5(int $number): bool
-    {
-        return $number % 3 == 0 || $number % 5 == 0;
-    }
-
+    /**
+     * @throws Exception
+     */
     public function getWordInfo(string $word): array
     {
         $happyNumberService = new HappyNumberService();
@@ -62,7 +94,7 @@ class WordsToNumbersService
         $sum = $this->translateWordToAlphabetSum($word);
 
         return [
-            'isMultipleOf3or5' => $this->isMultipleOf3Or5($sum),
+            'isMultipleOf3or5' => !empty($this->naturalNumbersService->getMultiplesOfTreeOrFive($sum, $sum + 1)),
             'isPrime' => $this->isPrime($sum),
             'isHappy' => $happyNumberService->isHappyNumber($sum)
         ];
