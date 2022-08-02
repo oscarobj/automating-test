@@ -9,10 +9,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
 {
     private int $min = 0;
 
-    /** @test
-     * verificar array com os múltiplos de três OU (||) cinco dos números naturais abaixo de 10
+    /**
+     * @test
      */
-    public function getMultiplesOfThreeOrFiveBelow10()
+    public function givenGetMultiplesOfThreeOrFiveWhenBelowTenThenReturnsFiveNumbers()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();
@@ -32,10 +32,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
         $this->assertEquals($expected, $multiples);
     }
 
-    /** @test
-     * verificar array com os múltiplos de três E (&&) cinco dos números naturais abaixo de 31
+    /**
+     * @test
      */
-    public function getMultiplesOfThreeAndFiveBelow31()
+    public function givenGetMultiplesOfThreeAndFiveWhenBelowThirtyOneReturnsThreeNumbers()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();
@@ -53,10 +53,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
         $this->assertEquals($expected, $multiples);
     }
 
-    /** @test
-     * verificar array com os múltiplos de (três OU (||) cinco) E 7 dos números naturais abaixo de 36
+    /**
+     * @test
      */
-    public function getMultiplesOfThreeAndSevenBelow36()
+    public function givenGetMultiplesOfThreeAndSevenWhenBelowThirtySixThenReturnsTreeNumbers()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();
@@ -75,10 +75,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
     }
 
 
-    /** @test
-     * Soma dos múltiplos de três E cinco dos números naturais abaixo de 10
+    /**
+     * @test
      */
-    public function sumMultiplesOfThreeOrFiveBelow10()
+    public function givenSumMultiplesOfThreeOrFiveWhenBelowTenThenReturnsTwentyTree()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();
@@ -93,10 +93,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
         $this->assertEquals($expected, $sumOfMultiples);
     }
 
-    /** @test
-     * Soma dos múltiplos de três E cinco dos números naturais abaixo de 1000
+    /**
+     * @test
      */
-    public function sumMultiplesOfThreeAndFiveBelow31()
+    public function givenSumMultiplesOfThreeAndFiveWhenBelowThirtyOneThenReturnsFortyFive()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();
@@ -111,10 +111,10 @@ class MultiplesOfThreeAndFiveTest extends TestCase
         $this->assertEquals($expected, $sumOfMultiples);
     }
 
-    /** @test
-     * Soma dos múltiplos de (três OU cinco) E 7 dos números naturais abaixo de 36
+    /**
+     * @test
      */
-    public function sumMultiplesOfThreeOrFiveAndSevenBelow36()
+    public function givenSumMultiplesOfThreeOrFiveAndSevenWhenBelowThirtySixThenReturnsFiftySix()
     {
         // Arrange
         $naturalNumbersService = new NaturalNumbersService();

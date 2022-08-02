@@ -12,7 +12,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar a tradução de uma letra
      */
-    public function testLetterTranslation()
+    public function givenCheckLetterTranslationWhenLetterIsPThenReturnsFortyTwo()
     {
         // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
@@ -30,7 +30,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar a separação de letras em um array
      */
-    public function testWordSplit()
+    public function givenWordSplitWhenWordIsAnaThenReturnsAAndNAndA()
     {
         // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
@@ -52,7 +52,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar a tradução (soma das letras) de uma palavra
      */
-    public function testWordTranslation()
+    public function givenTestWordTranslationWhenWordIsAboboraThenReturnsOneHundredFiftyEight()
     {
         // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
@@ -70,7 +70,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar se o número é múltiplo de 3 ou 5
      */
-    public function checkIfNumberIsPrime()
+    public function givenCheckIfNumberIsPrimeWhenNumbersAreElevenAndFourThenReturnsTrueAndFalseRespectively()
     {
         // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
@@ -90,7 +90,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar se o número é múltiplo de 3 ou 5
      */
-    public function checkIfNumberIsMultipleOf3Or5()
+    public function givenCheckIfNumberIsMultipleOfThreeOrFiveWhenMultiplesNumberAreTirtyAndTwoThenReturnsTrueAndFalseRespectively()
     {
         // Arrange
         $wordsToNumbersService = new WordsToNumbersService();
@@ -109,7 +109,7 @@ class WordsToNumbersTest extends TestCase
      * @test
      * Testar se a tradução da palavra é primo, múltiplo de 3 ou 5 E número feliz
      */
-    public function checkIfWordInfoWorks()
+    public function givenCheckIfWordInfoWorksWhenWordsAreBeAndBiAndEEEThenReturnsExpected()
     {
         // Arrange
 

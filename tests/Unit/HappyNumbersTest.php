@@ -10,7 +10,7 @@ class HappyNumbersTest extends TestCase
     /** @test
      * separar as partes de um inteiro
      */
-    public function splitInteger()
+    public function givenSplitIntegerWhenNumberIsTwelveThenReturnsTwoNumbers()
     {
         // Arrange
         $happyNumberService = new HappyNumberService();
@@ -30,7 +30,7 @@ class HappyNumbersTest extends TestCase
     /** @test
      * elevar ao quadrado os numeros de um array
      */
-    public function squareNumbers()
+    public function givenSquareNumbersWhenEntryIsOneAndTwoThenReturnsOneAndFour()
     {
         // Arrange
         $happyNumberService = new HappyNumberService();
@@ -73,7 +73,7 @@ class HappyNumbersTest extends TestCase
     /** @test
      * Verify is a happy number
      */
-    public function verifiyIfIsAHappyNumber()
+    public function givenCheckIfIsAHappyNumberWhenNumberIsSevenAndFifteenAndReturnsTrueAndFalseRespectively()
     {
         // Arrange
         $happyNumberService = new HappyNumberService();
